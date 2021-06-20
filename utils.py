@@ -2,7 +2,7 @@ import asyncio
 
 from typing import Union
 
-from conifg import ENCODING, PROTOCOL, VALIDATION_SERVER_ADDRESS, VALIDATION_SERVER_PORT
+from config import ENCODING, PROTOCOL, VALIDATION_SERVER_ADDRESS, VALIDATION_SERVER_PORT
 from specs import RequestVerb
 
 

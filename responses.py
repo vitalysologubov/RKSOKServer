@@ -1,6 +1,6 @@
 import asyncio
 
-from conifg import ENCODING, PROTOCOL
+from config import ENCODING, PROTOCOL
 
 
 def create_response(verb: str, name: str = "", content: str = "", check_verb: str = "") -> str:

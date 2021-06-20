@@ -3,7 +3,7 @@ import signal
 
 from loguru import logger
 
-from conifg import RKSOK_SERVER_ADDRESS, RKSOK_SERVER_PORT
+from config import RKSOK_SERVER_ADDRESS, RKSOK_SERVER_PORT
 from files import get_data, remove_data, write_data
 from responses import create_response, send_response
 from specs import RequestVerb, ResponseStatus, ValidationStatus
