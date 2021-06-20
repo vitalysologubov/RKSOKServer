@@ -1,5 +1,4 @@
 import asyncio
-import signal
 
 from loguru import logger
 
@@ -88,5 +87,4 @@ async def process_allowed_request(validation_result: str, verb: str, name: str, 
 
 
 if __name__ == "__main__":
-    signal.signal(signal.SIGINT, signal.SIG_DFL) # Для корректного выхода из программы при нажатии ctrl+c
     asyncio.run(run_rksok_server()) # Запуск асинхронного РКСОК сервера
