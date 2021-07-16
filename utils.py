@@ -1,17 +1,17 @@
-import asyncio
+import sys
+from typing import Union, Tuple
 
-from typing import Union
-
-from config import ENCODING, PROTOCOL, VALIDATION_SERVER_ADDRESS, VALIDATION_SERVER_PORT
+from config import DEFAULT_RKSOK_SERVER_ADDRESS, DEFAULT_RKSOK_SERVER_PORT, PROTOCOL
 from specs import RequestVerb
 
 
-def is_request_ends_correctly(request: str) -> bool:
-    """Checks request from client. Request is considered correct if it ends to
-    \r\n\r\n. In this case True is returned, otherwise - False.
-    """
-
-    return request.endswith("\r\n\r\n")
+def get_server_address_and_port() -> Tuple[str, int]:
+    """Returns server address and port from command-line arguments."""
+    
+    try:
+        return sys.argv[1], int(sys.argv[2])
+    except (IndexError, ValueError):
+        return DEFAULT_RKSOK_SERVER_ADDRESS, DEFAULT_RKSOK_SERVER_PORT
 
 
 def is_verb_correct(verb: str) -> bool:
@@ -38,7 +38,7 @@ def is_protocol_correct(protocol: str) -> bool:
     return protocol == PROTOCOL
 
 
-def is_request_completed(request: str) -> Union[bool, str]:
+def is_request_completed(request: str) -> Union[Tuple[str, str, str], bool]:
     """Checks request from client for completeness of content. If request
     contains verb, name and protocol values, then these values are returned,
     otherwise - False will be returned.
@@ -59,22 +59,3 @@ def is_request_completed(request: str) -> Union[bool, str]:
                 return verb, name, content
 
     return False
-
-
-async def get_validation_response(request: str) -> str:
-    """Sends a request from client to validation server and receives a
-    response with permission to process request.
-    """
-
-    reader, writer = await asyncio.open_connection(VALIDATION_SERVER_ADDRESS, VALIDATION_SERVER_PORT)
-
-    writer.write(request.encode(ENCODING))
-    await writer.drain()
-    
-    data = await reader.read(1024)
-    answer = data.decode()
-    
-    writer.close()
-    await writer.wait_closed()
-
-    return answer

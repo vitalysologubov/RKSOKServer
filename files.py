@@ -1,7 +1,6 @@
-import aiofiles
-
 from typing import Union
 
+import aiofiles
 from aiofiles import os
 from loguru import logger
 
@@ -19,7 +18,7 @@ async def get_data(name: str) -> Union[bool, str]:
     content is returned. If not - False."""
 
     try:
-        async with aiofiles.open(f"phone_book_data/{name}", "r") as file:
+        async with aiofiles.open(f"phone_book_data/{name}", "r", encoding="UTF-8") as file:
             content = await file.read()
     except FileNotFoundError:
         logger.info(f'File "phone_book_data/{name}" not found.')

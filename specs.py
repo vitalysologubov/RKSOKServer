@@ -1,4 +1,4 @@
-class RequestVerb():
+class RequestVerb:
     """Verbs specified in RKSOK specs for requests."""
 
     GET = "ОТДОВАЙ"
@@ -6,7 +6,7 @@ class RequestVerb():
     DELETE = "УДОЛИ"
 
 
-class ResponseStatus():
+class ResponseStatus:
     """Response statuses specified in RKSOK specs for responses."""
 
     OK = "НОРМАЛДЫКС"
@@ -15,7 +15,7 @@ class ResponseStatus():
     NOT_APPROVED = "НИЛЬЗЯ"
 
 
-class ValidationStatus():
+class ValidationStatus:
     """Validation statuses specified in RKSOK specs for requests."""
 
     CHECK = "АМОЖНА?"
