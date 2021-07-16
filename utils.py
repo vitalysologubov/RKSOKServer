@@ -7,7 +7,7 @@ from specs import RequestVerb
 
 def get_server_address_and_port() -> Tuple[str, int]:
     """Returns server address and port from command-line arguments."""
-    
+
     try:
         return sys.argv[1], int(sys.argv[2])
     except (IndexError, ValueError):
@@ -26,7 +26,7 @@ def is_name_correct(name: str) -> bool:
     """Checks name. If name is less than or equal to 30 characters, then True
     is returned, otherwise - False.
     """
-    
+
     return len(name) <= 30
 
 

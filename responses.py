@@ -37,10 +37,10 @@ async def get_validation_response(request: str) -> str:
 
     writer.write(request.encode(ENCODING))
     await writer.drain()
-    
+
     data = await reader.read(1024)
     answer = data.decode()
-    
+
     writer.close()
     await writer.wait_closed()
 

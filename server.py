@@ -14,7 +14,7 @@ async def run_rksok_server() -> None:
     """Runs async RKSOK server."""
 
     address, port = get_server_address_and_port()
-    
+
     try:
         server = await asyncio.start_server(process_request_body, address, port)
     except OSError as error:
@@ -32,15 +32,15 @@ async def get_request(reader: asyncio.streams.StreamReader) -> bytes:
     """
 
     response = b""
-    
+
     while True:
         data = await reader.read(1024)
-        
+
         if not data:
             break
-        
+
         response += data
-        
+
         if response.decode(ENCODING).endswith("\r\n\r\n"):
             return response
 
@@ -82,7 +82,7 @@ async def get_validation_result(verb: str, name: str, content: str) -> str:
 
     response_for_validation = create_response(verb=verb, name=name, content=content, check_verb=ValidationStatus.CHECK)
     logger.info(f"Response for validation: {response_for_validation!r}")
-    
+
     validation_result = await get_validation_response(response_for_validation)
     logger.info(f"Validation result: {validation_result!r}")
 
